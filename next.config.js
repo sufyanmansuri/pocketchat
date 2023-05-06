@@ -1,6 +1,11 @@
+const isProd = process.env.NODE_ENV === "production"
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
+  assetPrefix: isProd ? "/pocketchat/" : "",
+  images: {
+    unoptimized: true,
+  },
   experimental: {
     serverActions: true,
   },
