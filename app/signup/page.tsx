@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -25,23 +24,23 @@ export default function Login() {
             <form className="space-y-3">
               <Input type="text" name="username" placeholder="Username" />
               <Input type="password" name="password" placeholder="Password" />
+              <Input
+                type="password"
+                name="passwordConfirm"
+                placeholder="Confirm password"
+              />
               <Button className="w-full" type="submit">
                 Log in
               </Button>
             </form>
           </CardContent>
-          <CardFooter>
-            <Button className="w-full" variant="secondary">
-              Forgot password?
-            </Button>
-          </CardFooter>
         </Card>
         <Card>
           <CardContent className="py-3">
-            Don&apos;t have an account? &nbsp;
-            <Link href="/signup">
+            Already have an account? &nbsp;
+            <Link href="/">
               <Button variant="link" className="p-0" type="submit">
-                Sign up
+                Log in
               </Button>
             </Link>
           </CardContent>
