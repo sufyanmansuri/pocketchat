@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
 
 export default function Login() {
@@ -29,12 +30,11 @@ export default function Login() {
                 Log in
               </Button>
             </form>
-          </CardContent>
-          <CardFooter>
+            <Separator className="my-4" />
             <Button className="w-full" variant="secondary">
               Forgot password?
             </Button>
-          </CardFooter>
+          </CardContent>
         </Card>
         <Card>
           <CardContent className="py-3">
