@@ -1,10 +1,10 @@
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from './ui/button'
+import { Input } from './ui/input'
 
 export default function Login() {
   async function handleLogin(data: FormData) {
-    "use server";
-    console.log(Object.fromEntries(data.entries()));
+    'use server'
+    console.log(Object.fromEntries(data.entries()))
   }
 
   return (
@@ -14,5 +14,5 @@ export default function Login() {
 
       <Button type="submit">Let&apos;s go!</Button>
     </form>
-  );
+  )
 }
