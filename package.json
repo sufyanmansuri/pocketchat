@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "types": "tsc --pretty --noEmit",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.0.1",
@@ -29,5 +32,10 @@
     "tailwindcss": "3.3.2",
     "tailwindcss-animate": "^1.0.5",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.0",
+    "prettier": "^2.8.8"
   }
 }
