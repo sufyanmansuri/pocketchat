@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
+import { handleSignUp } from './actions'
 
 export default function Login() {
   return (
@@ -21,7 +22,7 @@ export default function Login() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-3">
+            <form className="space-y-3" action={handleSignUp}>
               <Input type="text" name="username" placeholder="Username" />
               <Input type="password" name="password" placeholder="Password" />
               <Input
@@ -30,7 +31,7 @@ export default function Login() {
                 placeholder="Confirm password"
               />
               <Button className="w-full" type="submit">
-                Log in
+                Sign up
               </Button>
             </form>
           </CardContent>
