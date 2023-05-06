@@ -1,9 +1,9 @@
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
+import { Button } from './ui/button'
+import { Input } from './ui/input'
 
 export default function Login() {
   async function handleLogin(data: FormData) {
-    "use server"
+    'use server'
     console.log(Object.fromEntries(data.entries()))
   }
 
