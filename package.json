@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "types": "tsc --pretty --noEmit",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -36,9 +35,7 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.8.0",
-    "gitmoji-cli": "^8.1.1",
     "husky": "^8.0.0",
     "prettier": "^2.8.8"
   }
 }
-
