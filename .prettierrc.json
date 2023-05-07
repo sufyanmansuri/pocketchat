@@ -1,7 +1,6 @@
 {
   "endOfLine": "crlf",
   "semi": false,
-  "arrowParens": "avoid",
   "singleQuote": true,
   "tabWidth": 2
 }

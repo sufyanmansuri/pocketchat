@@ -10,8 +10,17 @@ import {
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
+import { initPocketBase } from '@/lib/pb'
+import { redirect } from 'next/navigation'
+import { handleLogin } from '@/actions/auth'
 
-export default function Login() {
+export default async function Login() {
+  const pb = await initPocketBase()
+
+  if (pb.authStore.isValid) {
+    redirect('/home')
+  }
+
   return (
     <div className="flex-1 p-5 container flex justify-center md:items-center">
       <div className="md:w-96 mx-auto space-y-3 flex-1 md:flex-none">
@@ -23,7 +32,7 @@ export default function Login() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-3">
+            <form className="space-y-3" action={handleLogin}>
               <Input type="text" name="username" placeholder="Username" />
               <Input type="password" name="password" placeholder="Password" />
               <Button className="w-full" type="submit">
@@ -39,7 +48,7 @@ export default function Login() {
         <Card>
           <CardContent className="py-3">
             Don&apos;t have an account? &nbsp;
-            <Link href="/signup">
+            <Link href="/sign-up">
               <Button variant="link" className="p-0" type="submit">
                 Sign up
               </Button>
