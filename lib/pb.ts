@@ -10,13 +10,13 @@ export const initPocketBase = async () => {
 
   // send back the default 'pb_auth' cookie to the client with the latest store state
   pb.authStore.onChange(() => {
-    let authCookie = pb.authStore.exportToCookie()
+    let authCookie = pb.authStore.exportToCookie({ secure: true })
     authCookie = authCookie.replace('pb_auth=', '')
     try {
-      // @ts-ignore
+      // @ts-expect-error
       cookies().set('pb_auth', authCookie)
     } catch {
-      console.log("Error: Couldn't set cookie")
+      console.info("Error: Couldn't set cookie")
     }
   })
 
