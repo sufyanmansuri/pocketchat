@@ -1,4 +1,4 @@
-import { initPocketBase } from '@/lib/pb'
+import { initPocketBase } from '@/lib/_pb'
 import { redirect } from 'next/navigation'
 
 async function Protected({ children }: { children: React.ReactNode }) {

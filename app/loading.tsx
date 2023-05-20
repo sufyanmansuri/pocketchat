@@ -1,4 +1,6 @@
+import FullscreenSpinner from '@/components/FullscreenSpinner'
+
 function Loading() {
-  return <div>Loading...</div>
+  return <FullscreenSpinner />
 }
 export default Loading

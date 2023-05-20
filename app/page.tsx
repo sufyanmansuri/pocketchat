@@ -6,12 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
-import { initPocketBase } from '@/lib/pb'
+import LoginForm from '@/components/LoginForm'
 import { redirect } from 'next/navigation'
-import { handleLogin } from '@/actions/auth'
+import { initPocketBase } from '@/lib/_pb'
+import { logIn } from '@/_actions/auth'
 
 export default async function Login() {
   const pb = await initPocketBase()
@@ -31,13 +31,7 @@ export default async function Login() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-3" action={handleLogin}>
-              <Input type="text" name="username" placeholder="Username" />
-              <Input type="password" name="password" placeholder="Password" />
-              <Button className="w-full" type="submit">
-                Log in
-              </Button>
-            </form>
+            <LoginForm logIn={logIn} />
             <Separator className="my-4" />
             <Button className="w-full" variant="secondary">
               Forgot password?
