@@ -1,3 +1,4 @@
+import { log } from '@/utils/log'
 import { cookies } from 'next/headers'
 import PocketBase from 'pocketbase'
 
@@ -24,7 +25,7 @@ export const initPocketBase = async () => {
     // get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
     pb.authStore.isValid && (await pb.collection('users').authRefresh())
   } catch (_) {
-    console.log('Could not refresh auth')
+    log(_)
     // clear the auth store on failed refresh
     pb.authStore.clear()
   }

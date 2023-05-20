@@ -1,10 +1,14 @@
-import { handleLogout } from '@/actions/auth'
-import { Button } from '@/components/ui/button'
+import LogoutButton from '@/components/LogoutButton'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { initPocketBase } from '@/lib/pb'
+import { initPocketBase } from '@/lib/_pb'
+import { redirect, useRouter } from 'next/navigation'
 
 async function Home() {
   const pb = await initPocketBase()
+
+  if (!pb.authStore.isValid) {
+    redirect('/')
+  }
 
   const user = pb.authStore.model
 
@@ -16,9 +20,7 @@ async function Home() {
             <CardTitle>Hello, {user?.username}</CardTitle>
           </CardHeader>
           <CardContent>
-            <form action={handleLogout}>
-              <Button>Logout</Button>
-            </form>
+            <LogoutButton />
           </CardContent>
         </Card>
       </div>

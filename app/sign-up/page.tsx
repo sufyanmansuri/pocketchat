@@ -6,11 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 import Link from 'next/link'
-import { initPocketBase } from '@/lib/pb'
+import { initPocketBase } from '@/lib/_pb'
 import { redirect } from 'next/navigation'
-import { handleSignUp } from '@/actions/auth'
+import SignUpForm from '@/components/SignUpForm'
+import { logIn, signUp } from '@/_actions/auth'
 
 export default async function SignUp() {
   const pb = await initPocketBase()
@@ -30,18 +30,7 @@ export default async function SignUp() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-3" action={handleSignUp}>
-              <Input type="text" placeholder="Username" name="username" />
-              <Input type="password" placeholder="Password" name="password" />
-              <Input
-                type="password"
-                name="passwordConfirm"
-                placeholder="Confirm password"
-              />
-              <Button className="w-full" type="submit">
-                Sign up
-              </Button>
-            </form>
+            <SignUpForm logIn={logIn} signUp={signUp} />
           </CardContent>
         </Card>
         <Card>
