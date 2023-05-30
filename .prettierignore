@@ -5,3 +5,4 @@ pnpm-lock.yaml
 package-lock.json
 public
 pb_data
+pb_migrations

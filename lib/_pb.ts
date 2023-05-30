@@ -3,8 +3,7 @@ import { cookies } from 'next/headers'
 import PocketBase from 'pocketbase'
 
 export const initPocketBase = async () => {
-  const pb = new PocketBase(process.env.DB_URI)
-
+  const pb = new PocketBase(process.env.NEXT_PUBLIC_DB_URI)
   // load the store data from the request cookie string
   const authCookie = cookies().get('pb_auth')
   pb.authStore.loadFromCookie(`${authCookie?.name}=${authCookie?.value}`)
@@ -14,7 +13,6 @@ export const initPocketBase = async () => {
     let authCookie = pb.authStore.exportToCookie({ secure: true })
     authCookie = authCookie.replace('pb_auth=', '')
     try {
-      // @ts-expect-error
       cookies().set('pb_auth', authCookie)
     } catch {
       console.info("Error: Couldn't set cookie")
