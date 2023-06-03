@@ -3,14 +3,11 @@ import { Button } from './ui/button'
 
 function ChatsHeader() {
   return (
-    <div className="border border-t-0 border-x-0 py-3 sticky top-0 z-10">
+    <div className="border-b pt-4 pb-2">
       <div className="container">
         <div className="flex items-center">
           <div className="flex-1">
-            <h1 className="text-xl font-bold">
-              <MessageSquare className="h-6 w-6 mr-2 inline-block" />
-              Chats
-            </h1>
+            <h1 className="text-3xl font-bold">Chats</h1>
           </div>
           <div className="flex gap-3">
             <Button variant="outline" className="w-8 h-8 rounded-full p-0">

@@ -24,7 +24,9 @@ export default async function SignUp() {
       <div className="md:w-96 mx-auto space-y-3 flex-1 md:flex-none">
         <Card>
           <CardHeader>
-            <CardTitle>Pocketchat 💬</CardTitle>
+            <CardTitle>
+              <span className="text-2xl font-bold">Pocketchat 💬</span>
+            </CardTitle>
             <CardDescription>
               Connect with the people in your life.
             </CardDescription>

@@ -114,7 +114,7 @@ const ConversationItem = ({
             <p
               className={clsx(
                 'text-sm text-muted-foreground',
-                index === 0 ? 'text-primary' : ''
+                index === 0 && 'font-semibold text-primary-foreground'
               )}
             >
               *time here*
@@ -124,12 +124,12 @@ const ConversationItem = ({
             <p
               className={clsx(
                 'text-sm text-muted-foreground',
-                index === 0 ? 'font-semibold text-primary' : ''
+                index === 0 && 'font-semibold text-primary-foreground'
               )}
             >
               *last message here*
             </p>
-            {index === 0 && <Badge variant="secondary">1</Badge>}
+            {index === 0 && <Badge>1</Badge>}
           </div>
         </div>
       </div>

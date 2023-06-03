@@ -3,23 +3,25 @@ import { MessageSquare } from 'lucide-react'
 import { User2 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Button } from './ui/button'
+import { Badge } from './ui/badge'
 
 function Navigation() {
   const pathname = usePathname()
   const currentTab = pathname.split('/')[1]
 
   return (
-    <div className="border-t flex justify-around p-3">
-      <Link href="/home">
-        <Button variant="secondary" className="rounded-full">
+    <div className="flex justify-around p-2 backdrop-blur border bg-background/75 sticky bottom-2 mx-2 rounded-full">
+      <Link href="/home" className="flex flex-col items-center">
+        <Badge className="px-4">
           <MessageSquare className="w-6 h-6" />
-        </Button>
+        </Badge>
+        <span className="font-semibold">Chats</span>
       </Link>
-      <Link href="/profile">
-        <Button variant="ghost" className="rounded-full">
+      <Link href="/profile" className="flex flex-col items-center">
+        <Badge className="px-4" variant="secondary">
           <User2 className="w-6 h-6" />
-        </Button>
+        </Badge>
+        <span>Profile</span>
       </Link>
     </div>
   )
