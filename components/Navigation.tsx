@@ -3,6 +3,7 @@ import { MessageSquare } from 'lucide-react'
 import { User2 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Button } from './ui/button'
 
 function Navigation() {
   const pathname = usePathname()
@@ -11,16 +12,14 @@ function Navigation() {
   return (
     <div className="border-t flex justify-around p-3">
       <Link href="/home">
-        <MessageSquare
-          className="w-6 h-6"
-          {...(currentTab === 'home' ? { fill: '' } : {})}
-        />
+        <Button variant="secondary" className="rounded-full">
+          <MessageSquare className="w-6 h-6" />
+        </Button>
       </Link>
       <Link href="/profile">
-        <User2
-          className="w-6 h-6"
-          {...(currentTab === 'profile' ? { fill: '' } : {})}
-        />
+        <Button variant="ghost" className="rounded-full">
+          <User2 className="w-6 h-6" />
+        </Button>
       </Link>
     </div>
   )

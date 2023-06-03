@@ -2,10 +2,11 @@
 
 import pb from '@/lib/pb'
 import { ConversationsResponse, UsersResponse } from '@/types/pocketbase'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { Badge } from './ui/badge'
 import ProfilePic from './ProfilePic'
+import { UnsubscribeFunc } from 'pocketbase'
 
 const Conversations = () => {
   const user = pb.authStore.model
@@ -13,15 +14,16 @@ const Conversations = () => {
     ConversationsResponse<{ members: UsersResponse[] }>[]
   >([])
 
+  // Adds a new conversation entry
   const add = useCallback(
     async (record: ConversationsResponse) => {
-      if (conversations.findIndex(({ id }) => id === record.id)) return
+      if (conversations.findIndex(({ id }) => id === record.id) >= 0) return
 
       const memberId = record.members.find((id) => id !== user?.id)
       if (!memberId) return
       const member = await pb
         .collection('users')
-        .getOne<UsersResponse>(memberId)
+        .getOne<UsersResponse>(memberId, { $autoCancel: false })
 
       setConversations((prev) => [
         {
@@ -34,9 +36,13 @@ const Conversations = () => {
     [user, conversations]
   )
 
+  // Removes a conversations entry
   const remove = useCallback((conversationId: string) => {
     setConversations((prev) => prev.filter(({ id }) => conversationId !== id))
   }, [])
+
+  // Unsubscribes pb realtime connections
+  const unsubscribe = useRef<UnsubscribeFunc>()
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -53,17 +59,18 @@ const Conversations = () => {
   }, [])
 
   useEffect(() => {
-    pb.collection('conversations').subscribe<ConversationsResponse>(
-      '*',
-      (event) => {
+    pb.collection('conversations')
+      .subscribe<ConversationsResponse>('*', (event) => {
         const { action, record } = event
-        if (['create', 'update'].includes(action)) add(record)
+        if (action === 'create') add(record)
         else if (action === 'delete') remove(record.id)
-      }
-    )
+      })
+      .then((func) => {
+        unsubscribe.current = func
+      })
 
     return () => {
-      pb.collection('conversations').unsubscribe('*')
+      if (unsubscribe?.current) unsubscribe.current()
     }
   }, [add, remove])
 
@@ -71,10 +78,16 @@ const Conversations = () => {
     <div className="container flex-1">
       <ul>
         {conversations.map(async (conversation, index) => {
+          const member = conversation.expand?.members.find(
+            (member) => member.id !== user?.id
+          )
+
+          if (!member) return
+
           return (
             <ConversationItem
               key={conversation.id}
-              conversation={conversation}
+              data={{ id: conversation.id, member }}
               index={index}
             />
           )
@@ -85,22 +98,19 @@ const Conversations = () => {
 }
 
 const ConversationItem = ({
-  conversation,
+  data: { id, member },
   index,
 }: {
   index: number
-  conversation: ConversationsResponse<{ members: UsersResponse[] }>
+  data: { id: string; member: UsersResponse }
 }) => {
-  const member = conversation.expand?.members.find(
-    (member) => member.id !== 'user?.id'
-  )
   return (
-    <li key={conversation.id} className="py-3">
+    <li className="py-3">
       <div className="flex items-center gap-2">
-        <ProfilePic id={member?.id ?? ''} fallback={member?.username ?? ''} />
+        <ProfilePic id={member.id} fallback={member.username} />
         <div className="flex-1">
           <div className="flex justify-between">
-            <p className="font-semibold">{member?.username}</p>
+            <p className="font-semibold">{member.username}</p>
             <p
               className={clsx(
                 'text-sm text-muted-foreground',
