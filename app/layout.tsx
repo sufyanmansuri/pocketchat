@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import './globals.css'
 
 export const metadata = {
@@ -15,12 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col">
-        <main className="flex justify-center flex-1">{children}</main>
-        <footer className="flex justify-center text-sm text-muted-foreground p-3">
-          Pocketchat © 2023
-        </footer>
-      </body>
+      <body className="min-h-[100dvh] flex flex-col">{children}</body>
     </html>
   )
 }

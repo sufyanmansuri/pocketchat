@@ -6,14 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
-import LoginForm from '@/components/LoginForm'
-import { redirect } from 'next/navigation'
 import { initPocketBase } from '@/lib/_pb'
-import { logIn } from '@/_actions/auth'
+import { redirect } from 'next/navigation'
+import SignUpForm from '@/components/SignUpForm'
+import { logIn, signUp } from '@/_actions/auth'
 
-export default async function Login() {
+export default async function SignUp() {
   const pb = await initPocketBase()
 
   if (pb.authStore.isValid) {
@@ -25,25 +24,23 @@ export default async function Login() {
       <div className="md:w-96 mx-auto space-y-3 flex-1 md:flex-none">
         <Card>
           <CardHeader>
-            <CardTitle>Pocketchat 💬</CardTitle>
+            <CardTitle>
+              <span className="text-2xl font-bold">Pocketchat 💬</span>
+            </CardTitle>
             <CardDescription>
               Connect with the people in your life.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <LoginForm logIn={logIn} />
-            <Separator className="my-4" />
-            <Button className="w-full" variant="secondary">
-              Forgot password?
-            </Button>
+            <SignUpForm logIn={logIn} signUp={signUp} />
           </CardContent>
         </Card>
         <Card>
           <CardContent className="py-3">
-            Don&apos;t have an account? &nbsp;
-            <Link href="/sign-up">
+            Already have an account? &nbsp;
+            <Link href="/">
               <Button variant="link" className="p-0" type="submit">
-                Sign up
+                Log in
               </Button>
             </Link>
           </CardContent>
