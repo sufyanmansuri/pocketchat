@@ -1,5 +1,6 @@
 import { MessageSquare, PlusIcon, SearchIcon } from 'lucide-react'
 import { Button } from './ui/button'
+import NewChat from './NewChat'
 
 function ChatsHeader() {
   return (
@@ -14,10 +15,8 @@ function ChatsHeader() {
               <SearchIcon className="h-4 w-4" />
               <span className="sr-only">Search</span>
             </Button>
-            <Button variant="outline" className="w-8 h-8 rounded-full p-0">
-              <PlusIcon className="h-4 w-4" />
-              <span className="sr-only">New chat</span>
-            </Button>
+
+            <NewChat />
           </div>
         </div>
       </div>

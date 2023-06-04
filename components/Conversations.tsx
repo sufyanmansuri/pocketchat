@@ -114,7 +114,7 @@ const ConversationItem = ({
             <p
               className={clsx(
                 'text-sm text-muted-foreground',
-                index === 0 && 'font-semibold text-primary-foreground'
+                index === 0 && 'font-semibold text-secondary-foreground'
               )}
             >
               *time here*
@@ -124,7 +124,7 @@ const ConversationItem = ({
             <p
               className={clsx(
                 'text-sm text-muted-foreground',
-                index === 0 && 'font-semibold text-primary-foreground'
+                index === 0 && 'font-semibold text-secondary-foreground'
               )}
             >
               *last message here*
